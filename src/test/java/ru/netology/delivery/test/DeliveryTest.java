@@ -31,10 +31,12 @@ class DeliveryTest {
         $("[data-test-id=phone] input").setValue(validUser.getPhone());
         $("[data-test-id=agreement]").click();
         $(".button").click();
-        $(byText("Успешно!")).shouldBe(visible);
+        $("[data-test-id=success-notification] .notification__content")
+                .shouldBe(visible).should(exactText("Встреча успешно запланирована на " + firstMeetingDate));
         $("[data-test-id=date] .input__control").doubleClick().sendKeys(secondMeetingDate);
         $(".button").click();
         $$(".button").find(exactText("Перепланировать")).click();
-        $(byText("Успешно!")).shouldBe(visible);
+        $("[data-test-id=success-notification] .notification__content")
+                .shouldBe(visible).should(exactText("Встреча успешно запланирована на " + secondMeetingDate));
     }
 }
